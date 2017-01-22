@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.BtnStart = new System.Windows.Forms.Button();
             this.BtnStop = new System.Windows.Forms.Button();
+            this.BtnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.NumAnswers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -161,7 +162,7 @@
             this.BtnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnStart.Location = new System.Drawing.Point(13, 216);
             this.BtnStart.Name = "BtnStart";
-            this.BtnStart.Size = new System.Drawing.Size(111, 69);
+            this.BtnStart.Size = new System.Drawing.Size(76, 69);
             this.BtnStart.TabIndex = 0;
             this.BtnStart.Text = "Start";
             this.BtnStart.UseVisualStyleBackColor = true;
@@ -171,22 +172,33 @@
             // BtnStop
             // 
             this.BtnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnStop.Location = new System.Drawing.Point(176, 216);
+            this.BtnStop.Location = new System.Drawing.Point(211, 216);
             this.BtnStop.Name = "BtnStop";
-            this.BtnStop.Size = new System.Drawing.Size(111, 69);
+            this.BtnStop.Size = new System.Drawing.Size(76, 69);
             this.BtnStop.TabIndex = 17;
             this.BtnStop.Text = "Stop";
             this.BtnStop.UseVisualStyleBackColor = true;
             this.BtnStop.Visible = false;
             this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
+            // BtnUpdate
+            // 
+            this.BtnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnUpdate.Location = new System.Drawing.Point(95, 216);
+            this.BtnUpdate.Name = "BtnUpdate";
+            this.BtnUpdate.Size = new System.Drawing.Size(110, 69);
+            this.BtnUpdate.TabIndex = 18;
+            this.BtnUpdate.Text = "Update";
+            this.BtnUpdate.UseVisualStyleBackColor = true;
+            this.BtnUpdate.Visible = false;
+            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(554, 294);
-            this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.NumAnswers);
             this.Controls.Add(this.BtnNewQuestion);
@@ -199,8 +211,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PnlQuestions);
             this.Controls.Add(this.BtnStart);
+            this.Controls.Add(this.BtnStop);
+            this.Controls.Add(this.BtnUpdate);
             this.Name = "MainForm";
             this.Text = "TwitchPoll";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.NumAnswers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -221,6 +236,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button BtnStart;
         private System.Windows.Forms.Button BtnStop;
+        private System.Windows.Forms.Button BtnUpdate;
     }
 }
 

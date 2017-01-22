@@ -71,10 +71,12 @@
             this.BackgroundImage = global::TwitchPoll.Properties.Resources.Empty3;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(370, 425);
+            this.ControlBox = false;
             this.Controls.Add(this.PnlAnswers);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LblQuestion);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ObsScreen";
             this.Text = "ObsScreen";
             this.ResumeLayout(false);

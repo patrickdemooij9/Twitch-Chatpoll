@@ -23,9 +23,15 @@ namespace TwitchPoll
             _outputStream.WriteLine("JOIN #" + userName);
             _outputStream.Flush();
 
-            string response = ReadLine();
-            if (response != null && response.Equals(":tmi.twitch.tv 001 " + userName + " :Welcome, GLHF!"))
+            string response = ReadLine().PlayerName;
+            if (response != null && response.Equals("tmi.twitch.tv 001 " + userName + " "))
                 Connected = true;
+        }
+
+        public void Stop()
+        {
+            _tcpClient.GetStream().Close();
+            _tcpClient.Close();
         }
 
         public void Pong()
@@ -34,9 +40,36 @@ namespace TwitchPoll
             _outputStream.Flush();
         }
 
-        public string ReadLine()
+        public TwitchMessage ReadLine()
         {
-            return _inputStream.ReadLine();
+            if (_tcpClient.Connected)
+            {
+                TwitchMessage twitchMessage = FormatMessage(_inputStream.ReadLine());
+                if (twitchMessage.Message.Equals("PiNG"))
+                    Pong();
+
+                return twitchMessage;
+            }
+            return null;
+        }
+
+        private TwitchMessage FormatMessage(string message)
+        {
+            string chatMessage = string.Empty;
+            string playerName = string.Empty;
+
+            if (message == null)
+                return new TwitchMessage(chatMessage, playerName);
+
+            if (message.Split(':') != null && message.Split(':').Length > 2)
+            {
+                chatMessage = message.Split(':')[2];
+                if (message.Split(':')[1].Split('!') != null)
+                {
+                    playerName = message.Split(':')[1].Split('!')[0];
+                }
+            }
+            return new TwitchMessage(chatMessage, playerName);
         }
     }
 }
