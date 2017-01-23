@@ -29,7 +29,7 @@ namespace TwitchPoll
             
             _running = false;
             
-            PopulatePanel(2);
+            PopulatePanel(2, false);
         }
 
         #region Events
@@ -37,12 +37,12 @@ namespace TwitchPoll
         {
             TxbQuestion.Clear();
             NumAnswers.Value = NumAnswers.Minimum;
-            ClearPanel();
+            PopulatePanel((int)NumAnswers.Value, true);
         }
 
         private void NumAnswers_ValueChanged(object sender, EventArgs e)
         {
-            PopulatePanel((int)NumAnswers.Value);
+            PopulatePanel((int)NumAnswers.Value, false);
         }     
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -111,29 +111,30 @@ namespace TwitchPoll
         #endregion
 
         #region Other methods
-        private void PopulatePanel(int amountOfAnswers)
+        private void PopulatePanel(int amountOfAnswers, bool fullClear)
         {
             Panel panel = PnlQuestions;
-            ClearPanel();
+            PnlQuestions.Controls.Clear();
 
             int textBoxHeight = 20;
             if (textBoxHeight * amountOfAnswers > panel.Height)
                 textBoxHeight = panel.Height / amountOfAnswers;
 
+            List<TextBox> newList = new List<TextBox>();
             for (int i = 0; i < amountOfAnswers; i++)
             {
                 TextBox textBox = new TextBox();
                 textBox.Location = new System.Drawing.Point(0, 0 + textBoxHeight * i);
                 textBox.Text = "Answer " + (i + 1);
                 textBox.Size = new System.Drawing.Size(panel.Width, textBoxHeight);
-                _textBoxes.Add(textBox);
+
+                if (!fullClear && _textBoxes.Count > i && _textBoxes[i] != null)
+                    textBox.Text = _textBoxes[i].Text;
+                newList.Add(textBox);
                 panel.Controls.Add(textBox);
             }
-        }
-        private void ClearPanel()
-        {
-            PnlQuestions.Controls.Clear();
-            _textBoxes.Clear();
+
+            _textBoxes = newList;
         }
 
         private void StopObs()
