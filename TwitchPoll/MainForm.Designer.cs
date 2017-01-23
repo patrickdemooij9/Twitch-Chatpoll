@@ -129,7 +129,7 @@
             // 
             this.NumAnswers.Location = new System.Drawing.Point(13, 101);
             this.NumAnswers.Maximum = new decimal(new int[] {
-            8,
+            6,
             0,
             0,
             0});

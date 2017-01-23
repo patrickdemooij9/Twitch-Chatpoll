@@ -59,7 +59,7 @@
             this.PnlAnswers.BackColor = System.Drawing.Color.Transparent;
             this.PnlAnswers.Location = new System.Drawing.Point(52, 159);
             this.PnlAnswers.Name = "PnlAnswers";
-            this.PnlAnswers.Size = new System.Drawing.Size(271, 221);
+            this.PnlAnswers.Size = new System.Drawing.Size(271, 200);
             this.PnlAnswers.TabIndex = 3;
             // 
             // ObsScreen

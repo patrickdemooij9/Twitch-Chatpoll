@@ -20,8 +20,8 @@ namespace TwitchPoll
 
             _outputStream.WriteLine("PASS " + password);
             _outputStream.WriteLine("NICK " + userName);
-            _outputStream.WriteLine("JOIN #" + userName);
             _outputStream.Flush();
+            JoinChannel(userName);
 
             string response = ReadLine().PlayerName;
             if (response != null && response.Equals("tmi.twitch.tv 001 " + userName + " "))
@@ -34,9 +34,9 @@ namespace TwitchPoll
             _tcpClient.Close();
         }
 
-        public void Pong()
+        public void JoinChannel(string channelName)
         {
-            _outputStream.WriteLine("PONG :tmi.twitch.tv");
+            _outputStream.WriteLine("JOIN #" + channelName);
             _outputStream.Flush();
         }
 
@@ -70,6 +70,12 @@ namespace TwitchPoll
                 }
             }
             return new TwitchMessage(chatMessage, playerName);
+        }
+
+        private void Pong()
+        {
+            _outputStream.WriteLine("PONG :tmi.twitch.tv");
+            _outputStream.Flush();
         }
     }
 }
